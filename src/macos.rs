@@ -69,7 +69,7 @@ pub(crate) fn menus(layouts: &[String], shown: Option<&str>) -> Vec<Menu> {
         .map(|name| command(name, &format!("layout.switch:{name}")).checked(Some(name.as_str()) == shown))
         .chain([MenuItem::separator(), command("Next Layout", "layout.switch")]);
     vec![
-        Menu::new("Herdr").items([
+        Menu::new("KHube Multiplexer").items([
             command("What's New", "app.whats_new"),
             command("Check for Updates…", "app.settings:updates"),
             MenuItem::separator(),
@@ -77,11 +77,11 @@ pub(crate) fn menus(layouts: &[String], shown: Option<&str>) -> Vec<Menu> {
             MenuItem::separator(),
             MenuItem::os_submenu("Services", SystemMenuType::Services),
             MenuItem::separator(),
-            command("Hide Herdr", "app.hide"),
+            command("Hide KHube Multiplexer", "app.hide"),
             command("Hide Others", "app.hide_others"),
             command("Show All", "app.show_all"),
             MenuItem::separator(),
-            command("Quit Herdr", "app.quit"),
+            command("Quit KHube Multiplexer", "app.quit"),
         ]),
         Menu::new("File").items([
             command("New Tab", "tab.new"),
@@ -128,7 +128,7 @@ pub(crate) fn menus(layouts: &[String], shown: Option<&str>) -> Vec<Menu> {
         ]),
         Menu::new("Help").items([
             command("Keyboard Shortcuts", "app.help"),
-            command("Welcome to Herdr", "app.welcome"),
+            command("Welcome to KHube Multiplexer", "app.welcome"),
             MenuItem::separator(),
             command("Send Feedback…", "app.feedback"),
         ]),
@@ -188,7 +188,7 @@ mod tests {
         assert_eq!(key("New Tab").as_deref(), Some("cmd-t"));
         assert_eq!(key("Split Right").as_deref(), Some("cmd-d"));
         assert_eq!(key("Settings…").as_deref(), Some("cmd-,"));
-        assert_eq!(key("Quit Herdr").as_deref(), Some("cmd-q"));
+        assert_eq!(key("Quit KHube Multiplexer").as_deref(), Some("cmd-q"));
         assert_eq!(key("Copy").as_deref(), Some("cmd-c"));
         assert_eq!(key("Toggle Sidebar").as_deref(), Some("cmd-b"));
         assert_eq!(key("Minimize").as_deref(), Some("cmd-m"));
