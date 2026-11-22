@@ -77,14 +77,31 @@ const PAPER: Palette = Palette {
     ],
 };
 
-pub const PRESETS: &[&str] = &["graphite", "ink", "moss", "paper"];
+/// KHube: ink background (never pure black), green accent, no violet.
+const KHUBE: Palette = Palette {
+    background: 0x0f1115,
+    foreground: 0xd7dae0,
+    selection: 0x22372a,
+    cursor: Some(0x71d083),
+    status: DARK_STATUS,
+    ansi: [
+        0x3a3f4a, 0xe07a7a, 0x71d083, 0xe0c274, 0x7aa7e0, 0xd98aa6, 0x6fc7c0, 0xd7dae0, 0x6b7280, 0xf09a9a, 0xa3e6b0, 0xecd596, 0x9cc2f0,
+        0xe8a8c0, 0x92dcd6, 0xf4f6f8,
+    ],
+};
+/// Panel overrides KHube adds to the derived colors: green accent, hairline borders.
+const KHUBE_COLORS: &[(&str, &str)] =
+    &[("accent", "#71d083"), ("accent_foreground", "#0f1115"), ("border", "#ffffff10"), ("ring", "#71d08355")];
+
+pub const PRESETS: &[&str] = &["khube", "graphite", "ink", "moss", "paper"];
 
 /// The theme a layout without one shows, by appearance.
-pub const DEFAULT_DARK: &str = "graphite";
+pub const DEFAULT_DARK: &str = "khube";
 pub const DEFAULT_LIGHT: &str = "paper";
 
 fn preset(name: &str) -> Option<&'static Palette> {
     match name {
+        "khube" => Some(&KHUBE),
         "graphite" => Some(&GRAPHITE),
         "ink" => Some(&INK),
         "moss" => Some(&MOSS),
@@ -179,7 +196,8 @@ fn install_theme(path: &std::path::Path, name: &str, text: &str) {
 /// A theme by name: a preset, or `themes/<name>.json`.
 fn palette(name: &str) -> Result<(Palette, BTreeMap<String, String>), String> {
     if let Some(p) = preset(name) {
-        return Ok((p.clone(), BTreeMap::new()));
+        let colors = if name == "khube" { KHUBE_COLORS.iter().map(|(k, v)| (k.to_string(), v.to_string())).collect() } else { BTreeMap::new() };
+        return Ok((p.clone(), colors));
     }
     let path = theme_path(name);
     let text = std::fs::read_to_string(&path)
@@ -233,6 +251,13 @@ fn shipped_theme_upgrades_preserve_personal_edits() {
         std::fs::remove_file(&path).unwrap();
     }
     std::fs::remove_dir(root).unwrap();
+}
+
+#[test]
+fn khube_preset_is_ink_with_green_accent() {
+    let t = resolve(&KHUBE, &palette("khube").unwrap().1);
+    assert_eq!((t["background"].as_str(), t["accent"].as_str()), ("#0f1115", "#71d083"));
+    assert_eq!(DEFAULT_DARK, "khube");
 }
 
 #[test]

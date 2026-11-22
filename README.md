@@ -1,6 +1,8 @@
-# Herdr
+# KHube Multiplexer
 
-Herdr is a desktop app for terminals and coding agents. Keep work in spaces, see which agents need you, and leave terminals running when you close the window.
+> Fork of [Herdr](https://github.com/herdrdev/herdr-app), licensed under Apache-2.0. See LICENSE and THIRD-PARTY-NOTICES.
+
+KHube Multiplexer is a desktop app for terminals and coding agents. Keep work in spaces, see which agents need you, and leave terminals running when you close the window. It ships a default `khube` theme (ink background, green accent).
 
 ## Install
 
