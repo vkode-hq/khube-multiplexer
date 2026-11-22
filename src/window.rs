@@ -655,7 +655,7 @@ impl AppWindow {
         w.apply_look(window, cx);
         w.show_layout_notes(window, cx);
         if let (Some(n), false) = (&name, gone.is_empty()) {
-            let note = json!({ "title": format!("{n} needs mods that aren't here"), "body": format!("Showing Herdr instead. Missing: {}. Your {n} layout file is still there.", gone.join(", ")), "level": "info", "timeout": 12000 });
+            let note = json!({ "title": format!("{n} needs mods that aren't here"), "body": format!("Showing KHube Multiplexer instead. Missing: {}. Your {n} layout file is still there.", gone.join(", ")), "level": "info", "timeout": 12000 });
             w.open_overlay(mods::new_overlay_id(), json!({ "kind": "toast", "notification": note }), window, cx);
         }
 
@@ -4187,7 +4187,7 @@ impl AppWindow {
             Request::Run { name, args } => self.run(&name, args, window, cx),
             Request::OpenOverlay { id, spec } => self.open_overlay(id, spec, window, cx),
             Request::CloseOverlay { id } => self.close_overlay(&id, window, cx),
-            Request::SetWindowTitle(title) => window.set_window_title(title.as_deref().unwrap_or("Herdr")),
+            Request::SetWindowTitle(title) => window.set_window_title(title.as_deref().unwrap_or("KHube Multiplexer")),
             Request::SetBadge(text) => crate::badge::set(text.as_deref()),
             Request::Refresh => self.refresh_mods(cx),
             Request::Control { cmd, reply } => {
@@ -5107,8 +5107,8 @@ impl AppWindow {
         let core = crate::update::core();
         let core = core.ready.filter(|_| !core.updating && core.managed.is_none());
         match (crate::update::ready(), core) {
-            (Some(a), Some(c)) => Some(format!("Herdr {a} and herdr-core {c} are ready")),
-            (Some(a), None) => Some(format!("Herdr {a} is ready")),
+            (Some(a), Some(c)) => Some(format!("KHube Multiplexer {a} and herdr-core {c} are ready")),
+            (Some(a), None) => Some(format!("KHube Multiplexer {a} is ready")),
             (None, Some(c)) => Some(format!("herdr-core {c} is ready")),
             (None, None) => None,
         }
@@ -7476,7 +7476,7 @@ export default class Probe extends View {
             cx.window_title()
         };
         assert_eq!(title(json!("acorn"), cx).as_deref(), Some("acorn"));
-        assert_eq!(title(json!(null), cx).as_deref(), Some("Herdr"));
+        assert_eq!(title(json!(null), cx).as_deref(), Some("KHube Multiplexer"));
     }
 
     include!("window/pane_size_tests.rs");

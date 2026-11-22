@@ -72,6 +72,7 @@ function items(p, git) {
       return [
         ["New space", "space.new", {}],
         ["Keybinds", "app.help", {}],
+        ["Theme: khube", "app.theme", { name: "khube" }],
         ["Theme: graphite", "app.theme", { name: "graphite" }],
         ["Theme: ink", "app.theme", { name: "ink" }],
         ["Theme: moss", "app.theme", { name: "moss" }],

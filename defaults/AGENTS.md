@@ -327,12 +327,12 @@ layout's look and a block can differ:
   "terminal_padding": [10, 6], "terminal_opacity": 1, ... }
 ```
 
-- `theme`: `graphite`, `ink`, `moss` (dark), `paper` (light), or the name
+- `theme`: `khube`, `graphite`, `ink`, `moss` (dark), `paper` (light), or the name
   of a file in `themes/`; or one for each appearance:
   `"theme": { "light": "paper", "dark": "graphite" }` follows the system's
   light or dark mode (or the person's `appearance`). `app.theme {name}`
   sets the half of the name's lightness. A layout without a theme shows
-  settings.json's theme, else graphite or paper. `colors` overrides any theme color by name (see
+  settings.json's theme, else khube or paper. `colors` overrides any theme color by name (see
   `theme()` below), for terminals and panels alike: overrides apply in
   both appearances, so name theme colors (`chrome`, `canvas`) rather than
   writing hex when a layout should work light and dark.
